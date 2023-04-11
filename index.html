@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Detectar objetos</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <script src="//cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
+  <script>
+    var db = new PouchDB('my_database');
+  </script>
+  <section id="demos" class="invisible">
+
+
+    <div id="liveView" class="videoView">
+      <button id="webcamButton" class="mdc-button mdc-button--raised">
+        <span class="mdc-button__ripple"></span>
+        <span class="mdc-button__label">Activa camara</span>
+      </button>
+      <div id="number"></div>
+      <div class="shadow p-3 mb-5 bg-white rounded div">
+
+        <video id="webcam" autoplay playsinline></video>
+      </div>
+
+
+
+    </div>
+  </section>
+
+  <!-- partial -->
+  <script type="module" src="./script.js"></script>
+
+</body>
+
+</html>
