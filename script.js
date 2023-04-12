@@ -85,7 +85,7 @@ let stream = null
 async function enableCam(event) {
   constraints.video = {
     width: {
-      min: 600,
+      min: 575,
       ideal: 192,
       max: 600,
     },
