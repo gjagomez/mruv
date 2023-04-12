@@ -67,93 +67,29 @@ if (hasGetUserMedia()) {
   console.warn('getUserMedia() is not supported by your browser')
 }
 
-// flip button element
-let flipBtn = document.querySelector('#flip-btn')
-
-// default user media options
-let constraints = { audio: false, video: true }
-let shouldFaceUser = false
-
-// check whether we can use facingMode
-let supports = navigator.mediaDevices.getSupportedConstraints()
-if (supports['facingMode'] === true) {
-  flipBtn.disabled = false
-}
-
-let stream = null
-
 async function enableCam(event) {
-  constraints.video = {
-    width: {
-      min: 600,
-      ideal: 192,
-      max: 600,
-    },
-    height: {
-      min: 400,
-      ideal: 192,
-      max: 600,
-    },
-    facingMode: shouldFaceUser ? 'user' : 'environment',
+  initTimer()
+  if (!objectDetector) {
+    console.log('Wait! objectDetector not loaded yet.')
+    return
   }
+
+  enableWebcamButton.classList.add('removed')
+
+  const constraints = {
+    video: true,
+  }
+
   navigator.mediaDevices
     .getUserMedia(constraints)
-    .then(function (mediaStream) {
-      stream = mediaStream
+    .then(function (stream) {
       video.srcObject = stream
       video.addEventListener('loadeddata', predictWebcam)
-      video.play()
     })
-    .catch(function (err) {
-      console.log(err)
+    .catch((err) => {
+      console.error(err)
     })
-
-  //initTimer()
-  // if (!objectDetector) {
-  //   console.log('Wait! objectDetector not loaded yet.')
-  //   return
-  // }
-
-  // enableWebcamButton.classList.add('removed')
-
-  // const constraints = {
-  //   video: true,
-  // }
-
-  // navigator.mediaDevices
-  //   .getUserMedia(constraints)
-  //   .then(function (stream) {
-  //     video.srcObject = stream
-  //     video.addEventListener('loadeddata', predictWebcam)
-  //   })
-  //   .catch((err) => {
-  //     console.error(err)
-  //   })
 }
-
-flipBtn.addEventListener('click', function () {
-  if (stream == null) return
-  // we need to flip, stop everything
-  stream.getTracks().forEach((t) => {
-    t.stop()
-  })
-  // toggle / flip
-  shouldFaceUser = !shouldFaceUser
-  capture()
-})
-
-capture()
-
-document
-  .getElementById('capture-camera')
-  .addEventListener('click', function () {
-    // Elements for taking the snapshot
-    const video = document.querySelector('video')
-    canvas.width = video.videoWidth
-    canvas.height = video.videoHeight
-    canvas.getContext('2d').drawImage(video, 0, 0)
-  })
-
 async function predictWebcam() {
   if (runningMode === 'IMAGE') {
     runningMode = 'VIDEO'
