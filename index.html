@@ -3,8 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Detectar objetos</title>
+  <title>Fisica I </title>
   <link rel="stylesheet" href="./style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -89,7 +91,7 @@
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <script src="//cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
   <script>
-    var db = new PouchDB('my_database');
+    var db = new PouchDB('fisica');
   </script>
 
 
@@ -100,16 +102,29 @@
   <div class="col-lg-8 mx-auto p-4 py-md-5">
     <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
 
-      <button id="webcamButton" class="mdc-button mdc-button--raised">
-        <span class="mdc-button__ripple"></span>
-        <span class="mdc-button__label">Empezar</span>
-      </button>
-      <button disabled id="flip-btn" class="mdc-button mdc-button--raised">
-        <span class="mdc-button__ripple"></span>
-        <span class="mdc-button__label">Camara frontal</span>
-      </button>
+      <div class="row">
+        <div class="col-md-5">
+          <button id="webcamButton" class="mdc-button mdc-button--raised">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__label">Empezar</span>
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button disabled id="flip-btn" class="mdc-button mdc-button--raised">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__label">Camara frontal</span>
+          </button>
 
 
+        </div>
+      </div>
+      <button onclick="saveBase()">vasdf</button>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">Camara No</label>
+        <input type="email" class="form-control" id="idcamara" aria-describedby="emailHelp">
+
+      </div>
     </header>
 
     <main>
@@ -178,12 +193,51 @@
 
   <!-- partial -->
   <script type="module" src="./script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-    integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-    integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
-    crossorigin="anonymous"></script>
+
+
+
+  <script>
+    var db = new PouchDB('fisica');
+    var lseg = document.getElementById("number");
+    var txtCamera = document.getElementById("idcamara");
+
+
+
+    async function saveBase() {
+      var db = new PouchDB("fisica");
+
+      var _idDocs = txtCamera.value;
+      var tiempo = lseg.innerText;
+
+      if (_idDocs == "1" || _idDocs == 1) {
+
+        try {
+          var response = await db.put({
+            _id: 'mydoc',
+            tiempo: 0
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      if (_idDocs == "2" || _idDocs == 2) {
+
+        try {
+          var response = await db.put({
+            _id: 'mydocfinal',
+            tiempo: tiempo
+          });
+          location.reload();
+        } catch (err) {
+          console.log(err);
+        }
+
+      }
+
+    }
+
+  </script>
 </body>
 
 </html>
