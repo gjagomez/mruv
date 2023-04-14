@@ -112,18 +112,18 @@
         <div class="col-md-6">
           <button disabled id="flip-btn" class="mdc-button mdc-button--raised">
             <span class="mdc-button__ripple"></span>
-            <span class="mdc-button__label">Camara frontal</span>
+            <span class="mdc-button__label"></span>
           </button>
 
 
         </div>
       </div>
-      <button onclick="saveBase()">vasdf</button>
+
 
       <div class="form-group">
         <label for="exampleInputEmail1">Camara No</label>
         <input type="email" class="form-control" id="idcamara" aria-describedby="emailHelp">
-
+        <input type="email" class="form-control" id="idrev" aria-describedby="emailHelp">
       </div>
     </header>
 
@@ -194,18 +194,36 @@
   <!-- partial -->
   <script type="module" src="./script.js"></script>
 
-
+  <!-- 
 
   <script>
     var db = new PouchDB('fisica');
     var lseg = document.getElementById("number");
     var txtCamera = document.getElementById("idcamara");
 
+    async function SyncOfline() {
 
+      const db = new PouchDB('fisica')
+      const remoteDB = new PouchDB('https://newdev.genesisempresarial.org:6984/dbfi', {
+        skip_setup: false,
+        auth: {
+          username: 'admin',
+          password: 'enx!hve_GXD8hkt7aku',
+        },
+      })
+      const options = {
+        live: true,
+        retry: true,
+        continuous: true,
+      }
+      db.sync(remoteDB, options)
+
+
+    }
 
     async function saveBase() {
       var db = new PouchDB("fisica");
-
+      SyncOfline()
       var _idDocs = txtCamera.value;
       var tiempo = lseg.innerText;
 
@@ -216,6 +234,7 @@
             _id: 'mydoc',
             tiempo: 0
           });
+          SyncOfline()
         } catch (err) {
           console.log(err);
         }
@@ -228,6 +247,7 @@
             _id: 'mydocfinal',
             tiempo: tiempo
           });
+          SyncOfline()
           location.reload();
         } catch (err) {
           console.log(err);
@@ -237,7 +257,7 @@
 
     }
 
-  </script>
+  </script> -->
 </body>
 
 </html>

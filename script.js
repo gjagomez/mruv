@@ -1,4 +1,5 @@
-import vision from "https://cdn.skypack.dev/@mediapipe/tasks-vision@latest";
+//import vision from "https://cdn.skypack.dev/@mediapipe/tasks-vision@latest";
+import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js";
 const { ObjectDetector, FilesetResolver, Detection } = vision;
 const demosSection = document.getElementById("demos");
 let objectDetector;
@@ -37,7 +38,7 @@ async function handleClick(event) {
     infos[0].parentNode.removeChild(infos[0]);
   }
   if (!objectDetector) {
-    console.log("Wait for objectDetector to load before clicking");
+    console.log("No se pueden detectar los objetos");
     return;
   }
 
@@ -149,6 +150,7 @@ function displayVideoDetections(result) {
   for (let detection of result.detections) {
     const p = document.createElement("p");
     let objettip = detection.categories[0].categoryName;
+    var _idDocs = txtCamera.value;
     if (objettip === "person" || objettip === "truck") {
       p.innerText = detection.categories[0].categoryName;
       if (
@@ -156,8 +158,24 @@ function displayVideoDetections(result) {
         lseg.innerText === "0" ||
         lseg.innerText === 0
       ) {
+        if (_idDocs == "1" || _idDocs == 1) {
+          Save();
+        }
+        if (_idDocs == "2" || _idDocs == 2) {
+          Save2();
+        }
+        if (_idDocs == "3" || _idDocs == 3) {
+          Save3();
+        }
         initTimer();
       }
+
+      // if (_idDocs == "1" || _idDocs == 1) {
+      //   saveBase();
+      // }
+      // if (_idDocs == "2" || _idDocs == 2) {
+      //   saveBasedos();
+      // }
       // p.innerText =
       //   detection.categories[0].categoryName +
       //   ' - with ' +
@@ -210,3 +228,140 @@ function initTimer() {
     n++;
   }, 100);
 }
+
+async function Save() {
+  var lseg = document.getElementById("number");
+
+  var data = JSON.stringify({
+    _id: "inicio",
+    estado: 1,
+  });
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+    }
+  });
+
+  xhr.open("POST", "https://newdev.genesisempresarial.org:6984/dbfi");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader(
+    "Authorization",
+    "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+  );
+
+  xhr.send(data);
+}
+
+async function Save2() {
+  var lseg = document.getElementById("number");
+  var data = JSON.stringify({
+    _id: "inicio2",
+    estado: 2,
+  });
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+    }
+  });
+  xhr.open("POST", "https://newdev.genesisempresarial.org:6984/dbfi");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader(
+    "Authorization",
+    "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+  );
+
+  xhr.send(data);
+}
+
+async function Save3() {
+  var lseg = document.getElementById("number");
+  var data = JSON.stringify({
+    _id: "inicio3",
+    estado: 3,
+  });
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+    }
+  });
+  xhr.open("POST", "https://newdev.genesisempresarial.org:6984/dbfi");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader(
+    "Authorization",
+    "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+  );
+
+  xhr.send(data);
+}
+
+// var db = new PouchDB("fisica");
+// var lseg = document.getElementById("number");
+// var txtCamera = document.getElementById("idcamara");
+
+// async function SyncOfline() {
+//   const db = new PouchDB("fisica");
+//   const remoteDB = new PouchDB(
+//     "https://newdev.genesisempresarial.org:6984/dbfi",
+//     {
+//       skip_setup: false,
+//       auth: {
+//         username: "admin",
+//         password: "enx!hve_GXD8hkt7aku",
+//       },
+//     }
+//   );
+//   const options = {
+//     live: true,
+//     retry: true,
+//     continuous: true,
+//   };
+//   db.sync(remoteDB, options);
+// }
+
+// async function saveBase() {
+//   var db = new PouchDB("fisica");
+//   //
+//   var _idDocs = txtCamera.value;
+//   var tiempo = lseg.innerText;
+
+//   if (_idDocs == "1" || _idDocs == 1) {
+//     db.put({
+//       _id: "cam01",
+//       tiempo: 0,
+//     });
+
+//     db.changes().on("change", function () {
+//       console.log("Ch-Ch-Changes");
+//     });
+
+//     SyncOfline();
+//   }
+// }
+
+// async function saveBasedos() {
+//   var _idDocs = txtCamera.value;
+//   var tiempo = lseg.innerText;
+
+//   if (_idDocs == "2" || _idDocs == 2) {
+//     alert("hoa");
+//     db.put({
+//       _id: "cam02",
+//       tiempo: tiempo,
+//     });
+
+//     db.changes().on("change", function () {
+//       console.log("Ch-Ch-Changes");
+//     });
+
+//     SyncOfline();
+//     location.reload();
+//   }
+// }
