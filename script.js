@@ -226,6 +226,7 @@ function initTimer() {
     //seg = n
     l.innerHTML = n;
     n++;
+    Consultar();
   }, 100);
 }
 
@@ -302,6 +303,171 @@ async function Save3() {
   xhr.send(data);
 }
 
+async function Consultar() {
+  var _idDocs = txtCamera.value;
+  var data = JSON.stringify({
+    _id: "a6abb2ea9f45377010a0e48613c908bsc",
+    tip: "1",
+  });
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      //console.log(this.responseText);
+      var data = JSON.parse(this.responseText);
+
+      if (data.total_rows == 1) {
+        if (data.rows[0].id === "inicio") {
+          if (_idDocs == "1" || _idDocs == 1) {
+            saveTime();
+            //Saveti("Cam1", "0");
+          }
+        }
+      }
+
+      if (data.total_rows == 2) {
+        if (data.rows[1].id === "inicio2") {
+          if (_idDocs == "2" || _idDocs == 2) {
+            saveTime();
+            //location.reload();
+          }
+        }
+      }
+      if (data.total_rows == 3) {
+        if (data.rows[2].id === "inicio3") {
+          if (_idDocs == "3" || _idDocs == 3) {
+            saveTime();
+            //location.reload();
+          }
+        }
+      }
+    }
+  });
+
+  xhr.open("GET", "https://newdev.genesisempresarial.org:6984/dbfi/_all_docs");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader(
+    "Authorization",
+    "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+  );
+
+  xhr.send(data);
+}
+
+async function saveTime() {
+  var data = "";
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      var lseg = document.getElementById("number");
+      var _idDocs = txtCamera.value;
+      var objeto = JSON.parse(this.responseText);
+
+      var contar = objeto.rows.length;
+
+      if (contar == "0" || contar === "0") {
+        if (_idDocs == "1" || _idDocs == 1) {
+          Saveti("cam1", "0");
+        }
+        if (_idDocs == "2" || _idDocs == 2) {
+          Saveti("cam2", lseg.innerText);
+        }
+        if (_idDocs == "3" || _idDocs == 3) {
+          Saveti("cam3", lseg.innerText);
+        }
+      }
+      if (contar == "0" || contar == 0) {
+        var icam = objeto.rows[0].doc._id;
+        var idrev = objeto.rows[0].doc._rev;
+        var ti = lseg.innerText;
+        UpdateT(icam, ti, idrev);
+      }
+      if (contar == "1" || contar == 1) {
+        var icam = objeto.rows[0].doc._id;
+        var idrev = objeto.rows[0].doc._rev;
+        var ti = lseg.innerText;
+        UpdateT(icam, ti, idrev);
+      }
+      if (contar == "2" || contar == 2) {
+        var icam = objeto.rows[0].doc._id;
+        var idrev = objeto.rows[0].doc._rev;
+        var ti = lseg.innerText;
+        UpdateT(icam, ti, idrev);
+      }
+      // console.log(idcam);
+      // if (idcam == "1" || idcam == 1) {
+      // }
+      // if (idcam == "2" || idcam == 2) {
+      //   UpdateT("Cam2", lseg.innerText, idrev);
+      // }
+    }
+  });
+
+  xhr.open(
+    "GET",
+    "https://newdev.genesisempresarial.org:6984/dbti/_all_docs?include_docs=true"
+  );
+  xhr.setRequestHeader(
+    "Authorization",
+    "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+  );
+
+  xhr.send(data);
+}
+async function UpdateT(camara, tiempo, idrev) {
+  var data = JSON.stringify({
+    _id: camara,
+    _rev: idrev,
+    tiempo: tiempo,
+  });
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+    }
+  });
+
+  xhr.open("POST", "https://newdev.genesisempresarial.org:6984/dbti/");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader(
+    "Authorization",
+    "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+  );
+
+  xhr.send(data);
+}
+async function Saveti(camara, tiempo) {
+  var data = JSON.stringify({
+    _id: camara,
+    tiempo: tiempo,
+  });
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+    }
+  });
+
+  xhr.open("POST", "https://newdev.genesisempresarial.org:6984/dbti/");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader(
+    "Authorization",
+    "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+  );
+
+  xhr.send(data);
+}
 // var db = new PouchDB("fisica");
 // var lseg = document.getElementById("number");
 // var txtCamera = document.getElementById("idcamara");
