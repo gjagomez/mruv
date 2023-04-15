@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fisica I </title>
+  <link rel="stylesheet" href="./style.css">
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+
+  <div class="col-lg-8 mx-auto p-4 py-md-5">
+    <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+
+      <h3>Resultados</h3>
+    </header>
+
+    <main>
+      <div class="row">
+        <div class="col-md-12 center">
+
+          <div class="shadow p-3 mb-5 bg-white rounded div">
+            <div class="row">
+              <div class="col-md-5">
+                <img class="img-fluid"
+                  src="https://matemovil.com/wp-content/uploads/2015/03/formulas-mruv-movimiento-rectil%C3%ADneo-uniformemente-variado3.jpg"
+                  alt="" width="450px" height="200px">
+              </div>
+              <div class="col-md-6">
+                <h6>Datos obtenidos de camaras</h6>
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Camaras</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>
+                        <h5 id="cam1"></h5>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>
+                        <h5 id="cam2"></h5>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>
+                        <h5 id="cam3"></h5>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <th scope="row">4</th>
+                      <td>
+                        <h5 id="cam3">Distancia 3 m/s</h5>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+
+
+
+              </div>
+
+
+              <div class="row">
+
+                <div class="col-md-4">
+                  <br>
+
+                  <button type="button" onclick="Respuesta()" class="btn btn-warning">Calcular resultado</button>
+                </div>
+
+
+                <div class="col-md-12">
+                  <br>
+                  <div class="alert alert-warning" role="alert">
+                    <div class="jumbotron jumbotron-fluid">
+                      <div class="container">
+                        <p class="lead" id="idresultado"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+  </div>
+
+
+  <hr class="col-3 col-md-2 mb-5">
+
+  <div class="row g-5">
+    <div class="col-md-6">
+
+    </div>
+
+    <div class="col-md-6">
+
+    </div>
+  </div>
+  </main>
+  <footer class="pt-5 my-5 text-body-secondary border-top">
+    Fisica I GRUPO 3
+  </footer>
+  </div>
+
+
+
+
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
+  <script>
+
+    var data = "";
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+
+        const obj = JSON.parse(this.responseText)
+        const cam1 = document.getElementById("cam1");
+        cam1.innerHTML = "0 s"
+
+        const cam2 = document.getElementById("cam2");
+        cam2.innerHTML = obj.rows[1].doc.tiempo + " s"
+
+        const cam3 = document.getElementById("cam3");
+        cam3.innerHTML = obj.rows[0].doc.tiempo + " s"
+      }
+
+
+    });
+
+    xhr.open("GET", "https://newdev.genesisempresarial.org:6984/dbti/_all_docs?include_docs=true");
+    xhr.setRequestHeader("Authorization", "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ==");
+
+    xhr.send(data);
+
+    async function Respuesta() {
+      alert("Calculando espere los resultados")
+
+
+      var variable = document.getElementById('cam1').innerHTML;
+      var variable2 = document.getElementById('cam2').innerHTML;
+      var variable3 = document.getElementById('cam3').innerHTML;
+
+      var settings = {
+        "url": "https://api.openai.com/v1/chat/completions",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer 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"
+        },
+        "data": JSON.stringify({
+          "model": "gpt-3.5-turbo",
+          "messages": [
+            {
+              "role": "user",
+              "content": "Ayudame en calcular MRUV tenemos tres camaras de vigilancia una persona llego a la camara 1 con una velocidad inicia de " + variable + " centimetros por segundo tardo " + variable2 + " segundo al llegar a la cama 2 de la camara 2 a la 3 tardo " + variable3 + " segundos al llegar a la camara 3 ¿Cual es su velocidad final, cuantos metros recorrio, a que velocidad llego a la camara 2 a la camara 3?"
+            }
+          ],
+          "temperature": 0.7
+        }),
+      };
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        const obj = (response)
+        const resultado = document.getElementById("idresultado");
+        resultado.innerHTML = obj.choices[0].message.content;
+      });
+
+    }
+  </script>
+
+
+
+
+  <!-- partial -->
+
+
+  <!-- 
+
+  <script>
+    var db = new PouchDB('fisica');
+    var lseg = document.getElementById("number");
+    var txtCamera = document.getElementById("idcamara");
+
+    async function SyncOfline() {
+
+      const db = new PouchDB('fisica')
+      const remoteDB = new PouchDB('https://newdev.genesisempresarial.org:6984/dbfi', {
+        skip_setup: false,
+        auth: {
+          username: 'admin',
+          password: 'enx!hve_GXD8hkt7aku',
+        },
+      })
+      const options = {
+        live: true,
+        retry: true,
+        continuous: true,
+      }
+      db.sync(remoteDB, options)
+
+
+    }
+
+    async function saveBase() {
+      var db = new PouchDB("fisica");
+      SyncOfline()
+      var _idDocs = txtCamera.value;
+      var tiempo = lseg.innerText;
+
+      if (_idDocs == "1" || _idDocs == 1) {
+
+        try {
+          var response = await db.put({
+            _id: 'mydoc',
+            tiempo: 0
+          });
+          SyncOfline()
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      if (_idDocs == "2" || _idDocs == 2) {
+
+        try {
+          var response = await db.put({
+            _id: 'mydocfinal',
+            tiempo: tiempo
+          });
+          SyncOfline()
+          location.reload();
+        } catch (err) {
+          console.log(err);
+        }
+
+      }
+
+    }
+
+  </script> -->
+</body>
+
+</html>
