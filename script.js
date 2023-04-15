@@ -170,17 +170,6 @@ function displayVideoDetections(result) {
         initTimer();
       }
 
-      // if (_idDocs == "1" || _idDocs == 1) {
-      //   saveBase();
-      // }
-      // if (_idDocs == "2" || _idDocs == 2) {
-      //   saveBasedos();
-      // }
-      // p.innerText =
-      //   detection.categories[0].categoryName +
-      //   ' - with ' +
-      //   Math.round(parseFloat(detection.categories[0].score) * 100) +
-      //   '% confidence.'
       p.style =
         "left: " +
         (video.offsetWidth -
@@ -220,16 +209,112 @@ function displayVideoDetections(result) {
 }
 
 function initTimer() {
-  var n = 0;
-  var l = document.getElementById("number");
-  window.setInterval(function () {
-    //seg = n
-    l.innerHTML = n;
-    n++;
-    Consultar();
-  }, 100);
-}
+  var _idDocs = txtCamera.value;
+  if (_idDocs == 2) {
+    var data = "";
 
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        var obj = JSON.parse(this.responseText);
+        var tiempo = obj.rows[0].doc.tiempo;
+        var n = tiempo;
+        var l = document.getElementById("number");
+        window.setInterval(function () {
+          //seg = n
+          l.innerHTML = n;
+          n++;
+          Consultar();
+          Final();
+        }, 100);
+      }
+    });
+
+    xhr.open(
+      "GET",
+      "https://newdev.genesisempresarial.org:6984/dbti/_all_docs?include_docs=true"
+    );
+    xhr.setRequestHeader(
+      "Authorization",
+      "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+    );
+
+    xhr.send(data);
+  } else if (_idDocs == 2) {
+    var data = "";
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        var obj = JSON.parse(this.responseText);
+        var tiempo = obj.rows[1].doc.tiempo;
+        var n = tiempo;
+        var l = document.getElementById("number");
+        window.setInterval(function () {
+          //seg = n
+          l.innerHTML = n;
+          n++;
+          Consultar();
+          Final();
+        }, 100);
+      }
+    });
+
+    xhr.open(
+      "GET",
+      "https://newdev.genesisempresarial.org:6984/dbti/_all_docs?include_docs=true"
+    );
+    xhr.setRequestHeader(
+      "Authorization",
+      "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+    );
+
+    xhr.send(data);
+  } else {
+    var n = 0;
+    var l = document.getElementById("number");
+    window.setInterval(function () {
+      //seg = n
+      l.innerHTML = n;
+      n++;
+      Consultar();
+      Final();
+    }, 100);
+  }
+}
+async function Final() {
+  var data = "";
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      var objeto = JSON.parse(this.responseText);
+
+      var contar = objeto.rows.length;
+      console.log(contar);
+      if (contar == 3 || contar == "3") {
+        location.reload();
+      }
+    }
+  });
+
+  xhr.open(
+    "GET",
+    "https://newdev.genesisempresarial.org:6984/dbfi/_all_docs?include_docs=true"
+  );
+  xhr.setRequestHeader(
+    "Authorization",
+    "Basic YWRtaW46ZW54IWh2ZV9HWEQ4aGt0N2FrdQ=="
+  );
+
+  xhr.send(data);
+}
 async function Save() {
   var lseg = document.getElementById("number");
 
@@ -377,12 +462,12 @@ async function saveTime() {
           Saveti("cam3", "0");
         }
       }
+
       if (_idDocs == "1" || _idDocs == 1) {
-        var icam = objeto.rows[1].doc._id;
-        var idrev = objeto.rows[1].doc._rev;
+        var icam = objeto.rows[0].doc._id;
+        var idrev = objeto.rows[0].doc._rev;
         var ti = lseg.innerText;
         UpdateT(icam, ti, idrev);
-        location.reload();
       }
 
       if (_idDocs == "2" || _idDocs == 2) {
@@ -390,7 +475,7 @@ async function saveTime() {
         var idrev = objeto.rows[1].doc._rev;
         var ti = lseg.innerText;
         UpdateT(icam, ti, idrev);
-        location.reload();
+        //location.reload();
       }
 
       if (_idDocs == "3" || _idDocs == 2) {
@@ -398,7 +483,7 @@ async function saveTime() {
         var idrev = objeto.rows[2].doc._rev;
         var ti = lseg.innerText;
         UpdateT(icam, ti, idrev);
-        location.reload();
+        //location.reload();
       }
     }
   });
