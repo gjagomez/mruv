@@ -373,38 +373,24 @@ async function saveTime() {
       if (contar == "0" || contar === "0") {
         if (_idDocs == "1" || _idDocs == 1) {
           Saveti("cam1", "0");
-        }
-        if (_idDocs == "2" || _idDocs == 2) {
-          Saveti("cam2", lseg.innerText);
-        }
-        if (_idDocs == "3" || _idDocs == 3) {
-          Saveti("cam3", lseg.innerText);
+          Saveti("cam2", "0");
+          Saveti("cam3", "0");
         }
       }
-      if (contar == "0" || contar == 0) {
-        var icam = objeto.rows[0].doc._id;
-        var idrev = objeto.rows[0].doc._rev;
+
+      if (_idDocs == "2" || _idDocs == 2) {
+        var icam = objeto.rows[1].doc._id;
+        var idrev = objeto.rows[1].doc._rev;
         var ti = lseg.innerText;
         UpdateT(icam, ti, idrev);
       }
-      if (contar == "1" || contar == 1) {
-        var icam = objeto.rows[0].doc._id;
-        var idrev = objeto.rows[0].doc._rev;
+
+      if (_idDocs == "3" || _idDocs == 2) {
+        var icam = objeto.rows[2].doc._id;
+        var idrev = objeto.rows[2].doc._rev;
         var ti = lseg.innerText;
         UpdateT(icam, ti, idrev);
       }
-      if (contar == "2" || contar == 2) {
-        var icam = objeto.rows[0].doc._id;
-        var idrev = objeto.rows[0].doc._rev;
-        var ti = lseg.innerText;
-        UpdateT(icam, ti, idrev);
-      }
-      // console.log(idcam);
-      // if (idcam == "1" || idcam == 1) {
-      // }
-      // if (idcam == "2" || idcam == 2) {
-      //   UpdateT("Cam2", lseg.innerText, idrev);
-      // }
     }
   });
 
