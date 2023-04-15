@@ -377,12 +377,20 @@ async function saveTime() {
           Saveti("cam3", "0");
         }
       }
+      if (_idDocs == "1" || _idDocs == 1) {
+        var icam = objeto.rows[1].doc._id;
+        var idrev = objeto.rows[1].doc._rev;
+        var ti = lseg.innerText;
+        UpdateT(icam, ti, idrev);
+        location.reload();
+      }
 
       if (_idDocs == "2" || _idDocs == 2) {
         var icam = objeto.rows[1].doc._id;
         var idrev = objeto.rows[1].doc._rev;
         var ti = lseg.innerText;
         UpdateT(icam, ti, idrev);
+        location.reload();
       }
 
       if (_idDocs == "3" || _idDocs == 2) {
@@ -390,6 +398,7 @@ async function saveTime() {
         var idrev = objeto.rows[2].doc._rev;
         var ti = lseg.innerText;
         UpdateT(icam, ti, idrev);
+        location.reload();
       }
     }
   });
