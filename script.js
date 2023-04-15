@@ -227,7 +227,6 @@ function initTimer() {
           l.innerHTML = n;
           n++;
           Consultar();
-          Final();
         }, 100);
       }
     });
@@ -259,7 +258,6 @@ function initTimer() {
           l.innerHTML = n;
           n++;
           Consultar();
-          Final();
         }, 100);
       }
     });
@@ -282,7 +280,6 @@ function initTimer() {
       l.innerHTML = n;
       n++;
       Consultar();
-      Final();
     }, 100);
   }
 }
@@ -424,6 +421,7 @@ async function Consultar() {
         if (data.rows[2].id === "inicio3") {
           if (_idDocs == "3" || _idDocs == 3) {
             saveTime();
+            Final();
             //location.reload();
           }
         }
